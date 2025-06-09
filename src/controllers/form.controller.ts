@@ -15,7 +15,6 @@ export const saveForm = async (
   try {
     const formData: IForm = req.body;
     const result = await formService.saveForm(formData);
-    console.log(result);
     return responseStatus(res, HTTP_STATUS.OK, msg.form.saved, result);
   } catch (error) {
     next(error);
