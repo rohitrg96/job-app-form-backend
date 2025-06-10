@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IForm extends Document {
   personal: {
@@ -68,5 +68,5 @@ const formSchema = new Schema<IForm>(
   { timestamps: true }
 );
 
-const Form = mongoose.model<IForm>("Form", formSchema);
+const Form = mongoose.model<IForm>('Form', formSchema);
 export default Form;

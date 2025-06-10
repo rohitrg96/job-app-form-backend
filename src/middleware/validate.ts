@@ -1,5 +1,5 @@
-import { ObjectSchema } from "joi";
-import { Request, Response, NextFunction } from "express";
+import { ObjectSchema } from 'joi';
+import { Request, Response, NextFunction } from 'express';
 
 export const validationMiddleware = (schema: ObjectSchema) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -7,21 +7,21 @@ export const validationMiddleware = (schema: ObjectSchema) => {
 
     // Handle different HTTP methods and gather data to validate
     switch (req.method) {
-      case "GET":
-      case "DELETE":
+      case 'GET':
+      case 'DELETE':
         dataToValidate = { ...req.query, ...req.params };
         break;
 
-      case "POST":
-      case "PUT":
-      case "PATCH":
+      case 'POST':
+      case 'PUT':
+      case 'PATCH':
         dataToValidate = { ...req.body, ...req.params };
         break;
 
       default:
         res.status(400).json({
           error: {
-            message: "Unsupported HTTP method",
+            message: 'Unsupported HTTP method',
           },
         });
         return;
@@ -33,8 +33,8 @@ export const validationMiddleware = (schema: ObjectSchema) => {
     // If validation fails, return a 400 response with the errors
     if (error) {
       res.status(400).json({
-        status: "error",
-        message: "Validation failed",
+        status: 'error',
+        message: 'Validation failed',
         errors: error.details.map((detail) => ({
           field: detail.context?.key,
           message: detail.message,

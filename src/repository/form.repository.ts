@@ -1,4 +1,4 @@
-import Form, { IForm } from "../models/Form";
+import Form, { IForm } from '../models/Form';
 
 export class FormRepository {
   createForm = async (formData: IForm): Promise<IForm> => {

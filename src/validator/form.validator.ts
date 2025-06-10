@@ -1,5 +1,5 @@
-import Joi from "joi";
-import { validationMiddleware } from "../validation/validate";
+import Joi from 'joi';
+import { validationMiddleware } from '../middleware/validate';
 
 const referenceSchema = Joi.object({
   fullName: Joi.string().required(),

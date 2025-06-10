@@ -1,9 +1,10 @@
-import express, { Request, Response } from "express";
-import dotenv from "dotenv";
-import formRoutes from "./routes/form.routes";
-import cors from "cors";
-import connectDB from "./config/db";
-import { rateLimiter } from "./middleware/rateLimiter";
+import express, { Request, Response } from 'express';
+import dotenv from 'dotenv';
+import formRoutes from './routes/form.routes';
+import cors from 'cors';
+import connectDB from './config/db';
+import { rateLimiter } from './middleware/rateLimiter';
+import logger from './utils/logger';
 
 dotenv.config();
 
@@ -19,20 +20,20 @@ app.use(rateLimiter);
 connectDB();
 
 // Routes
-app.get("/", (req: Request, res: Response) => {
-  res.send("Job form API");
+app.get('/', (req: Request, res: Response) => {
+  res.send('Job form API');
 });
 
-app.use("/api/forms", formRoutes);
+app.use('/api/forms', formRoutes);
 
 // 404 Not Found middleware
 app.use((req: Request, res: Response) => {
   res.status(404).json({
     status: 404,
-    message: "Route not found",
+    message: 'Route not found',
   });
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => logger.info(`Server started on ${PORT}`));
 
 export default app;
